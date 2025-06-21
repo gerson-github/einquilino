@@ -11,3 +11,7 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 npm run build → Gera a versão otimizada para produção.
 
 npm run preview → Simula como ficará o projeto já compilado (após o build).
+
+# eInquilino
+
+meu projeto de gestao de contrato de aluguel
