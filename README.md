@@ -20,7 +20,7 @@ meu projeto de gestao de contrato de aluguel
     executa       executa   executa     executa
 
 Vite => index.html => main.js => App.vue => page.vue (components)
-|==> style.css => tailwindcss (Import)
+** main.js e a porta de entrada
 
 1. npm run dev
 2. Vite lê config + .env
@@ -29,3 +29,7 @@ Vite => index.html => main.js => App.vue => page.vue (components)
 5. Vite serve main.js → importa App.vue → importa componentes/css...
 6. Vite transforma tudo com esbuild
 7. Navegador renderiza a página
+
+
+# documento de requisitos e plano de trabalho
+https://docs.google.com/document/d/1-0T_OL9FeiJ9x3c9ImgHBmrxFGv6SznkJXLEWfrYD4I/edit?tab=t.0#heading=h.rmrujbph06ak

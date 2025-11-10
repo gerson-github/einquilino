@@ -1,6 +1,54 @@
 
 @import "tailwindcss";
+@plugin "daisyui";
+ 
+@theme {
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-sidebar: #1f2937;
+    --color-sidebar-hover: #374151;
+}
 
+
+
+/* link base: sem background, padding top/bottom e left, alinhado */
+.router-link {
+  @apply flex items-center gap-2 py-3 pl-4 pr-3 rounded-lg transition-colors duration-150;
+  @apply text-gray-300; /* texto muted por padrão */
+  background: transparent; /* garante sem bg por default */
+}
+
+/* hover quando NÃO ativo: overlay mais claro que o sidebar (bom para sidebars escuros) */
+.router-link:hover {
+  @apply bg-white/10 text-white;
+}
+
+/* estado ativo (apenas aqui aplicamos o botão azul) */
+.router-link-active {
+  @apply bg-blue-500 text-white font-semibold;
+}
+
+/* hover quando ativo: escurece um pouco o azul */
+.router-link-active:hover {
+  @apply bg-blue-600;
+}
+
+.icon {
+  @apply w-5 h-5
+}
+
+.sidebar {
+  @apply  p-6 bg-sidebar text-white flex flex-col w-55 lg:w-65;
+ 
+}
+.sidebar-divider {
+  @apply -mx-6 border-t border-gray-600 my-4
+}
+
+/* Hover enquanto ativo: feedback (azul mais escuro) */
+/* .router-link-active:hover {
+  @apply bg-blue-600;
+} */
 
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
