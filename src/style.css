@@ -8,42 +8,59 @@
     --color-sidebar: #1f2937;
     --color-sidebar-hover: #374151;
 }
+ 
 
+  body {
+  color: var(--neutral-content);
+  background-color: var(--base-100);
+}  
 
+ 
+
+.sidebar {
+  /* @apply  p-6 bg-sidebar text-white flex flex-col w-55 lg:w-65; */
+  @apply p-6 flex flex-col w-55 lg:w-65;
+  color: var(--neutral-content);      /* texto respeita o tema */
+  background-color: var(--color-sidebar); /* mantém sua cor customizada */
+}
+
+.sidebar-divider {
+  @apply -mx-6 border-t border-gray-600 my-4
+}
 
 /* link base: sem background, padding top/bottom e left, alinhado */
 .router-link {
   @apply flex items-center gap-2 py-3 pl-4 pr-3 rounded-lg transition-colors duration-150;
-  @apply text-gray-300; /* texto muted por padrão */
+ /* @apply text-gray-300;  texto muted por padrão */
+  color: var(--neutral-content);
   background: transparent; /* garante sem bg por default */
 }
 
 /* hover quando NÃO ativo: overlay mais claro que o sidebar (bom para sidebars escuros) */
 .router-link:hover {
-  @apply bg-white/10 text-white;
+  /* @apply bg-white/10 text-white; */
+  background-color: rgba(255,255,255,0.1);
+  color: var(--neutral-content); /* mantém legível */
 }
 
 /* estado ativo (apenas aqui aplicamos o botão azul) */
 .router-link-active {
-  @apply bg-blue-500 text-white font-semibold;
+  /* @apply bg-blue-500 text-white font-semibold; */
+   @apply font-semibold;
+  background-color: var(--color-primary); /* azul fixo */
+  color: var(--neutral-content); /* texto adaptável */
 }
 
 /* hover quando ativo: escurece um pouco o azul */
 .router-link-active:hover {
-  @apply bg-blue-600;
+  /* @apply bg-blue-600; */
+  background-color: #1d4ed8; /* azul mais escuro */
 }
 
 .icon {
-  @apply w-5 h-5
+  @apply w-6 h-6
 }
 
-.sidebar {
-  @apply  p-6 bg-sidebar text-white flex flex-col w-55 lg:w-65;
- 
-}
-.sidebar-divider {
-  @apply -mx-6 border-t border-gray-600 my-4
-}
 
 /* Hover enquanto ativo: feedback (azul mais escuro) */
 /* .router-link-active:hover {
