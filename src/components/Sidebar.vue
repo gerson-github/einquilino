@@ -16,18 +16,16 @@ import {
 </script>
 
 <template>
-  <aside class="sidebar">
-    <!-- <h1 class="text-4xl">Sidebar</h1> -->
-
+  <aside class="sidebar ">
     <div>
-      <h1 class="text-xl font-bold text-white">Gerenciador de Contratos</h1>
-      <p class="text-sm text-gray-300 mt-1">SaaS de Aluguel</p>
+      <h1 class="text-xl font-bold text-white">{{ $t("appName") }}</h1>
+      <p class="text-sm text-gray-300 mt-1">{{ $t("appSubtitle") }}</p>
     </div>
 
     <hr class="sidebar-divider" />
 
     <!-- active-class="router-link-active" -->
-    <nav class="flex flex-col gap-2">
+    <nav class="flex flex-col gap-2 text-white">
       <router-link
         to="/"
         class="router-link"
@@ -36,7 +34,7 @@ import {
         <span>
           <LayoutDashboard class="icon" />
         </span>
-        <span>Dashboard</span>
+        <span>{{ $t("dashboard") }}</span>
       </router-link>
 
       <router-link
@@ -45,7 +43,7 @@ import {
         active-class="router-link-active"
       >
         <span><Building class="icon" /></span>
-        <span>Cadastro de Imoveis</span>
+        <span>{{ $t("properties") }}</span>
       </router-link>
 
       <router-link
@@ -54,7 +52,7 @@ import {
         active-class="router-link-active"
       >
         <span><UserCheck class="icon" /></span>
-        <span>Locadores</span>
+        <span>{{ $t("landlords") }}</span>
       </router-link>
 
       <router-link
@@ -63,7 +61,7 @@ import {
         active-class="router-link-active"
       >
         <span><Users class="icon" /></span>
-        <span>Locatarios</span>
+        <span>{{ $t("tenants") }}</span>
       </router-link>
 
       <router-link
@@ -72,7 +70,7 @@ import {
         active-class="router-link-active"
       >
         <span><FileText class="icon" /></span>
-        <span>Contratos</span>
+        <span>{{ $t("contracts") }}</span>
       </router-link>
 
       <router-link
@@ -81,7 +79,7 @@ import {
         active-class="router-link-active"
       >
         <span><CreditCard class="icon" /></span>
-        <span>Pagamentos</span>
+        <span>{{ $t("payments") }}</span>
       </router-link>
 
       <router-link
@@ -90,12 +88,12 @@ import {
         active-class="router-link-active"
       >
         <span><Bell class="icon" /></span>
-        <span>Notificacoes</span>
+        <span>{{ $t("notifications") }}</span>
       </router-link>
 
       <router-link to="/Relatorios" class="router-link">
         <span><BarChart3 class="icon" /></span>
-        <span>Relatorios</span>
+        <span>{{ $t("reports") }}</span>
       </router-link>
     </nav>
 
@@ -108,8 +106,9 @@ import {
       >
         <!-- Container principal: ícone + nome + subtítulo -->
         <div class="flex items-center gap-2 -ml-[3rem]">
-          
-          <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center">
+          <div
+            class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center"
+          >
             <User class="w-5 h-5 text-white" />
           </div>
           <!-- <User class="icon" /> -->
