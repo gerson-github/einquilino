@@ -11,6 +11,7 @@ import { Search, Settings, Bell } from "lucide-vue-next";
         <h2 class="text-2xl font-bold ">Dashboard</h2>
         <p class="text-gray-600">Bem-vindo ao seu painel de controle</p>
       </div>
+
       <div class="flex items-center space-x-4">
         <!-- Search -->
         <div class="relative">
@@ -22,22 +23,24 @@ import { Search, Settings, Bell } from "lucide-vue-next";
           <Search class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
         </div>
 
-        <Settings class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
 
-<div class="flex items-center gap-2">
-    <label for="lang" class="sr-only">Language</label>
+
+  <div class="flex items-center gap-2">
+    <!-- <label for="lang" class="">Language</label> -->
     <select
       id="lang"
-      v-model="lang"
-      @change="setLang"
-      class="rounded-md border px-2 py-1 bg-white text-sm"
+      v-model="currentLang"
+      @change="changeLang(currentLang)"
+          class="border border-gray-300 rounded-md px-3 py-2 font-semibold bg-white text-gray-800
+           focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       aria-label="Choose language"
     >
-      <option value="pt">🇧🇷 Português</option>
+      <option selected value="pt">🇧🇷 Português</option>
       <option value="en">🇺🇸 English</option>
     </select>
-  </div>
+  </div> 
 
+  <!-- rounded-md border px-2 py-1 bg-white text-sm bg-gray-700 dark:bg-gray-200 text-gray-700 dark:text-gray-300-->
 
 
 
@@ -79,7 +82,7 @@ import { Search, Settings, Bell } from "lucide-vue-next";
 
 
 
-<script>
+<!-- <script>
 export default {
   methods: {
     changeLang(lang) {
@@ -87,4 +90,29 @@ export default {
     },
   },
 };
+</script> -->
+
+<script>
+export default {
+  data() {
+    return {
+      currentLang: this.$i18n.locale, // pega o idioma atual
+    };
+  },
+  methods: {
+    changeLang(lang) {
+      this.$i18n.locale = lang;        // altera o idioma
+      localStorage.setItem('app-lang', lang); // opcional: persiste a escolha
+    },
+  },
+  mounted() {
+    // carregar idioma salvo, se existir
+    const saved = localStorage.getItem('app-lang');
+    if (saved) {
+      this.currentLang = saved;
+      this.$i18n.locale = saved;
+    }
+  },
+};
+
 </script>
