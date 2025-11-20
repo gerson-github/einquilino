@@ -33,3 +33,6 @@ Vite => index.html => main.js => App.vue => page.vue (components)
 
 # documento de requisitos e plano de trabalho
 https://docs.google.com/document/d/1-0T_OL9FeiJ9x3c9ImgHBmrxFGv6SznkJXLEWfrYD4I/edit?tab=t.0#heading=h.rmrujbph06ak
+
+# website deployed on render
+https://einquilino.onrender.com/
