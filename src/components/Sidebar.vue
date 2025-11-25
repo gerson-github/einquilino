@@ -31,9 +31,7 @@ import {
         class="router-link"
         exact-active-class="router-link-active"
       >
-        <span>
-          <LayoutDashboard class="icon" />
-        </span>
+        <LayoutDashboard class="icon" />
         <span>{{ $t("dashboard") }}</span>
       </router-link>
 
@@ -42,7 +40,7 @@ import {
         class="router-link"
         active-class="router-link-active"
       >
-        <span><Building class="icon" /></span>
+        <Building class="icon" />
         <span>{{ $t("properties") }}</span>
       </router-link>
 
@@ -51,7 +49,7 @@ import {
         class="router-link"
         active-class="router-link-active"
       >
-        <span><UserCheck class="icon" /></span>
+        <UserCheck class="icon" />
         <span>{{ $t("landlords") }}</span>
       </router-link>
 
@@ -60,7 +58,7 @@ import {
         class="router-link"
         active-class="router-link-active"
       >
-        <span><Users class="icon" /></span>
+        <Users class="icon" />
         <span>{{ $t("tenants") }}</span>
       </router-link>
 
@@ -69,7 +67,7 @@ import {
         class="router-link"
         active-class="router-link-active"
       >
-        <span><FileText class="icon" /></span>
+        <FileText class="icon" />
         <span>{{ $t("contracts") }}</span>
       </router-link>
 
@@ -78,7 +76,7 @@ import {
         class="router-link"
         active-class="router-link-active"
       >
-        <span><CreditCard class="icon" /></span>
+        <CreditCard class="icon" />
         <span>{{ $t("payments") }}</span>
       </router-link>
 
@@ -87,12 +85,12 @@ import {
         class="router-link"
         active-class="router-link-active"
       >
-        <span><Bell class="icon" /></span>
+        <Bell class="icon" />
         <span>{{ $t("notifications") }}</span>
       </router-link>
 
       <router-link to="/Relatorios" class="router-link">
-        <span><BarChart3 class="icon" /></span>
+        <BarChart3 class="icon" />
         <span>{{ $t("reports") }}</span>
       </router-link>
     </nav>
