@@ -29,3 +29,4 @@ prototype
 storybook-static
 
 src/stories/
+.storybook
