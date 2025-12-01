@@ -1,3 +1,5 @@
+
+
 <script setup>
 import {
   LayoutDashboard,
@@ -16,7 +18,7 @@ import {
 </script>
 
 <template>
-  <aside class="sidebar ">
+  <aside class="sidebar">
     <div>
       <h1 class="text-xl font-bold text-white">{{ $t("appName") }}</h1>
       <p class="text-sm text-gray-300 mt-1">{{ $t("appSubtitle") }}</p>
