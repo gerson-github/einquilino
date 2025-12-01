@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 prototype
+
+*storybook.log
+storybook-static
+
+src/stories/
