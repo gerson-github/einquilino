@@ -1,4 +1,5 @@
 // tailwind.config.js
+// tailwind.config.js
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
@@ -6,8 +7,27 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    //logs: false,  disables logs in terminal (but not the CSS banner)
-    themes: ["light", "dark"], // optional: list your themes here
+    themes: [
+      {
+        myTheme: {
+          "primary": "#3b82f6",
+          "secondary": "#64748b",
+          "accent": "#22c55e",
+          "neutral": "#1f2937",
+
+          // ⚠️ Your default background ("white ice")
+          "base-100": "#f1f5f9",
+
+          // Optional but recommended
+          "info": "#38bdf8",
+          "success": "#4ade80",
+          "warning": "#fbbf24",
+          "error": "#f87171",
+        },
+      },
+      "light",
+       "dark",
+    ],
   },
 };
 
