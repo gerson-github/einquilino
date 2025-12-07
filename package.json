@@ -35,10 +35,7 @@
     "vite": "^6.3.5",
     "vitest": "^4.0.13"
   },
-  "resolutions": {
-    "@rollup/rollup-linux-x64-gnu": "^3.0.0"
-  },
-  "optionalDependencies": {
+    "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.53.3"
   }
 }
