@@ -1,4 +1,4 @@
-import "./main.css"; // importa os estilos globais da aplicacao
+import "./assets/main.css"; // importa os estilos globais da aplicacao
 import { createApp } from "vue"; // Importa a função para criar a instância principal do Vue.
 import App from "./App.vue"; // Importa o componente raiz (App.vue).
 import i18n from "./i18n";
