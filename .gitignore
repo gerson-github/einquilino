@@ -31,3 +31,4 @@ storybook-static
 src/stories/
 .storybook
 .env
+*old*
