@@ -1,14 +1,45 @@
 <template>
-  <main class="flex-1 p-6 overflow-auto">
+  <main class="flex-1 p-6 overflow-auto" >
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
       <!-- Total Contratos -->
-      <infoCard
-        :icon="FileText"
-        strTitle="Pgto Pendentes"
-        strValue="2 / $ 1200"
-        
-      />
+
+      <div v-if="loading">Loading...</div>
+
+      <div v-else-if="indicators">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <infoCard
+            
+            :icon="FileText"
+            strTitle="Pgto Pendentes"
+            :strValue="indicators.pending_payments_value"
+          />
+
+          <infoCard
+            
+            :icon="CheckCircle"
+            strTitle="Receita Prevista"
+            :strValue="indicators.expected_revenue"
+          />
+
+          <infoCard
+            
+            :icon="Clock"
+            strTitle="Receita Recebida"
+            :strValue="indicators.received_revenue"
+          />
+
+          <infoCard
+            
+            :icon="DollarSign"
+            strTitle="Receita Mensal"
+            :strValue="indicators.monthly_revenue"
+          />
+        </div>
+      </div>
+
+      <div v-else-if="error">{{ error }}</div>
+
       <!-- <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         style="border: 5px solid green; height: 6rem;"
         <div class="flex items-center">
@@ -43,7 +74,7 @@
       </div> -->
 
       <!-- Contratos Ativos -->
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <!-- <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <div class="flex items-center">
           <div class="p-3 bg-green-100 rounded-lg">
             <svg
@@ -70,10 +101,10 @@
             <p class="text-2xl font-bold text-gray-900">$ 5200</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Pagamentos Pendentes -->
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <!-- <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <div class="flex items-center">
           <div class="p-3 bg-yellow-100 rounded-lg">
             <svg
@@ -98,10 +129,10 @@
             <p class="text-2xl font-bold text-gray-900">$ 3800</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Receita Mensal -->
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <!-- <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <div class="flex items-center">
           <div class="p-3 bg-purple-100 rounded-lg">
             <svg
@@ -128,8 +159,8 @@
             <p class="text-2xl font-bold text-gray-900">R$ 45.200</p>
           </div>
         </div>
-      </div>
-    </div>
+      </div> -->
+    
 
     <!-- Recent Contracts Table -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200">
@@ -411,32 +442,35 @@
     </div>
   </main>
 
+  <!-- <div v-if="loading">Loading...</div>
 
+  <div v-else-if="indicators">
+    <p>Monthly revenue: {{ indicators.monthly_revenue }}</p>
+    <p>Pending payments: {{ indicators.pending_payments_qty }}</p>
+  </div>
 
+  <div v-else-if="error">{{ error }}</div>
 
-
+  <pre>{{ { indicators, loading, error } }}</pre> -->
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import InfoCard from "@/components/DashboardCard.vue";
-import { FileText, Users } from "lucide-vue-next";
+import {
+  CheckCircle,
+  FileText,
+  Users,
+  Clock,
+  DollarSign,
+} from "lucide-vue-next";
 // import ContractTable from "./views/components/ContractTable.vue";
-import { useContracts } from "@/composables/useDashboard.js";
+import { useIndicators } from "@/composables/useIndicators.js";
 
-//propriedade
-// const props = defineProps ({
-// icon: {type:Object, default:Bell },
-// strTitle: {type:String, default:""},
-// strValue: {type:String, default:""},
-// bgIconClass: {type:String, default:"bg-blue-500"}
-// });
-
-
-const { contracts, totals, load } = useContracts();
+const { indicators, loading, error, loadIndicators } = useIndicators();
 
 onMounted(() => {
-  load();
+  loadIndicators();
 });
 
 function formatCurrency(v) {
@@ -445,4 +479,20 @@ function formatCurrency(v) {
     currency: "BRL",
   }).format(v);
 }
+
+// import {
+//   Users,
+//   FileText,
+//   CheckCircle
+// } from "lucide-vue-next";
 </script>
+
+<!-- 
+//propriedade
+// const props = defineProps ({
+// icon: {type:Object, default:Bell },
+// strTitle: {type:String, default:""},
+// strValue: {type:String, default:""},
+// bgIconClass: {type:String, default:"bg-blue-500"}
+// }); 
+-->
