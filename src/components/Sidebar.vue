@@ -1,5 +1,3 @@
-
-
 <script setup>
 import {
   LayoutDashboard,
@@ -10,10 +8,7 @@ import {
   CreditCard,
   Bell,
   BarChart3,
-  Settings,
   User,
-  UserCheck2,
-  BarChart2,
 } from "lucide-vue-next";
 </script>
 
@@ -47,7 +42,7 @@ import {
       </router-link>
 
       <router-link
-        to="/Locadores"
+        to="/locadores"
         class="router-link"
         active-class="router-link-active"
       >
@@ -56,7 +51,7 @@ import {
       </router-link>
 
       <router-link
-        to="/Locatarios"
+        to="/locatarios"
         class="router-link"
         active-class="router-link-active"
       >
@@ -65,7 +60,7 @@ import {
       </router-link>
 
       <router-link
-        to="/Contratos"
+        to="/contratos"
         class="router-link"
         active-class="router-link-active"
       >
@@ -74,7 +69,7 @@ import {
       </router-link>
 
       <router-link
-        to="/Pagamentos"
+        to="/pagamentos"
         class="router-link"
         active-class="router-link-active"
       >
@@ -83,7 +78,7 @@ import {
       </router-link>
 
       <router-link
-        to="/Notificacoes"
+        to="/notificacoes"
         class="router-link"
         active-class="router-link-active"
       >
@@ -91,7 +86,7 @@ import {
         <span>{{ $t("notifications") }}</span>
       </router-link>
 
-      <router-link to="/Relatorios" class="router-link">
+      <router-link to="/relatorios" class="router-link">
         <BarChart3 class="icon" />
         <span>{{ $t("reports") }}</span>
       </router-link>
@@ -101,7 +96,7 @@ import {
       <hr class="sidebar-divider" />
 
       <router-link
-        to="/Usuarios"
+        to="/usuarios"
         class="router-link flex flex-col gap-1 mt-auto"
       >
         <!-- Container principal: ícone + nome + subtítulo -->
