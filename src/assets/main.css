@@ -9,29 +9,6 @@
 
 @layer components {
 
-  /************************
-    Card wrapper 
-   ************************/
-    /* .card {
-      @apply bg-white p-6 rounded-lg shadow-sm border border-gray-200;
-    } */
-
-    /* Icon container inside card */
-    /* .card-icon {
-      @apply p-3 rounded-lg flex items-center justify-center;
-       background-color can still be dynamic via class or inline style 
-    } */
-
-    /* Card text */
-    /* .card-title {
-      @apply text-sm font-medium text-gray-600;
-    }
-
-    .card-value {
-      @apply text-2xl font-bold text-gray-900;
-    } */
-
-
 
   .sidebar {
     /* @apply  p-6 bg-sidebar text-white flex flex-col w-55 lg:w-65; */
@@ -78,6 +55,10 @@
   @apply w-6 h-6
 }
 
+.input {
+  @apply w-full rounded-xl border border-gray-300 px-4 py-2
+         focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
 }
 
 /* Hover enquanto ativo: feedback (azul mais escuro) */
