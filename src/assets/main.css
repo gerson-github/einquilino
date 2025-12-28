@@ -59,6 +59,21 @@
   @apply w-full rounded-xl border border-gray-300 px-4 py-2
          focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
+
+
+/* .input {
+  @apply w-full border rounded-lg px-4 py-2;
+} */
+
+.btn-primary {
+  @apply bg-blue-600 text-white px-6 py-2 rounded-lg;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 px-6 py-2 rounded-lg;
+}
+
+
 }
 
 /* Hover enquanto ativo: feedback (azul mais escuro) */
