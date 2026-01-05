@@ -6,7 +6,7 @@ import request from "./api";
 // }
 
 export async function getMonthlyIndicators() {
-  const response = await fetch('/indicators/monthly');
+  const response = await request('/indicators/monthly');
   if (!response.ok) throw new Error('Failed to fetch indicators');
   const data = await response.json();
   return data.indicators; // apenas os valores internos
