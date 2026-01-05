@@ -1,5 +1,3 @@
-
-// composables/useIndicators.js
 import { ref } from 'vue';
 import { getMonthlyIndicators } from '@/services/indicators.service';
 
@@ -22,8 +20,6 @@ export function useIndicators() {
       loading.value = false;
     }
   }
-
-  //onMounted(loadIndicators)
 
   return {
     indicators,
