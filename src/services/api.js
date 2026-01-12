@@ -4,6 +4,8 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 async function request(url, options = {}) {
   const normalizedUrl = url.startsWith("/") ? url : `/${url}`;
 
+  console.log("essa e a url:", `${BASE_URL}${normalizedUrl}`);
+
   const response = await fetch(`${BASE_URL}${normalizedUrl}`, {
     ...options,
     headers: {
@@ -14,12 +16,16 @@ async function request(url, options = {}) {
 
   if (!response.ok) {
     const errorBody = await response.text();
-    throw new Error(errorBody || "Erro na requisição");
+    throw new Error(errorBody || `Erro na requisição: ${response.statusText}`);
   }
 
   if (response.status === 204) return null;
 
-  return response.json();
+  const data = await response.json();
+
+  console.log("resposta da api:", data);
+
+  return data;
 }
 
 export default request;
