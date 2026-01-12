@@ -1,44 +1,44 @@
 <template>
-  <main class="flex-1 p-6 overflow-auto" >
+  <main class="flex-1 p-6 overflow-auto">
     <!-- Stats Cards -->
 
-      <!-- Total Contratos -->
+    <!-- Total Contratos -->
 
-      <div v-if="loading">Loading...</div>
+    <!-- <pre>{{ indicators }}</pre> -->
 
-      <div v-else-if="indicators">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <infoCard
-            
-            :icon="FileText"
-            strTitle="Pgto Pendentes"
-            :strValue="indicators.pending_payments_value"
-          />
+    <div v-if="loading">Loading...</div>
 
-          <infoCard
-            
-            :icon="CheckCircle"
-            strTitle="Receita Prevista"
-            :strValue="indicators.expected_revenue"
-          />
+    <div v-else-if="indicators">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <infoCard
+          :icon="FileText"
+          strTitle="Pgto Pendentes"
+          :strValue="indicators.pending_payments_value"
+        />
 
-          <infoCard
-            
-            :icon="Clock"
-            strTitle="Receita Recebida"
-            :strValue="indicators.received_revenue"
-          />
+        <infoCard
+          :icon="CheckCircle"
+          strTitle="Receita Prevista"
+          :strValue="indicators.expected_revenue"
+        />
 
-          <infoCard
-            
-            :icon="DollarSign"
-            strTitle="Receita Mensal"
-            :strValue="indicators.monthly_revenue"
-          />
-        </div>
+        <infoCard
+          :icon="Clock"
+          strTitle="Receita Recebida"
+          :strValue="indicators.received_revenue"
+        />
+
+        <infoCard
+          :icon="DollarSign"
+          strTitle="Receita Mensal"
+          :strValue="indicators.monthly_revenue"
+        />
       </div>
+    </div>
 
-      <div v-else-if="error">{{ error }}</div>
+    <div v-else-if="error">
+      <p>Error while loading data: {{ error }}</p>
+    </div>
 
     <!-- Recent Contracts Table -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200">
@@ -357,12 +357,6 @@ function formatCurrency(v) {
     currency: "BRL",
   }).format(v);
 }
-
-// import {
-//   Users,
-//   FileText,
-//   CheckCircle
-// } from "lucide-vue-next";
 </script>
 
 <!-- 
