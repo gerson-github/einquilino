@@ -1,6 +1,9 @@
 <template>
   <!-- Protege todo o conteúdo que depende do template -->
-  <div v-if="template && template.groups" class="max-w-6xl mx-auto p-6 space-y-8">
+  <div
+    v-if="template && template.groups"
+    class="max-w-6xl mx-auto p-6 space-y-8"
+  >
     <h1 class="text-2xl font-bold text-gray-800">
       {{ template.templateName }}
     </h1>
@@ -58,7 +61,9 @@
               class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8"
             >
               <div class="mb-6 border-b border-gray-50 pb-4">
-                <h2 class="text-xl font-bold text-gray-800">{{ group.name }}</h2>
+                <h2 class="text-xl font-bold text-gray-800">
+                  {{ group.name }}
+                </h2>
                 <p class="text-sm text-gray-500 mt-1">
                   Step {{ index + 1 }} of {{ template.groups.length }}
                 </p>
@@ -116,9 +121,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, watch, computed, version } from "vue";
 import FieldRenderer from "@/components/fieldRenderer.vue";
 import { useTemplate } from "@/composables/useTemplate";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 
 const formData = ref({});
 const currentStep = ref(0);
@@ -129,22 +137,25 @@ watch(template, (val) => {
   console.log("TEMPLATE RECEBIDO:", val);
 });
 
-
 // Carrega template ao montar
 onMounted(() => {
-  loadTemplate("a1b2c3d4-e5f6-7890-1234-567890abcdef");
+  //loadTemplate("a1b2c3d4-e5f6-7890-1234-567890abcdef");
+  loadTemplate("c1111111-1111-1111-1111-111111111111");
 });
 
 // Inicializa formData **quando o template chega**
 watch(template, (newTemplate) => {
   if (!newTemplate?.groups) return;
   formData.value = {};
-  newTemplate.groups.forEach(group => {
-    group.fields.forEach(field => {
-      formData.value[field.key] = "";
+  newTemplate.groups.forEach((group) => {
+    group.fields.forEach((field) => {
+      formData.value[field.key] = field.value ?? "";
     });
   });
 });
+
+
+
 
 // Navegação steps
 const nextStep = () => {
@@ -156,8 +167,25 @@ const prevStep = () => {
 
 // Submit
 const submitForm = () => {
-  console.log("Payload:", formData.value);
-  alert("Form submitted successfully!");
+  //console.log("Payload:", formData.value);
+  //alert("Form submitted successfully!");
+
+  try {
+
+    axios.post(`${API_URL}/contract-data`, {
+      templateId: template.value.id,
+      version: template.value.version,
+      submittedAt: new Date().toISOString(),
+      data: formData.value,
+    });
+
+    alert("Contract saved successfully!");
+
+  } catch (error) {
+    console.error("Error saving contract:", error);
+    alert("Failed to save contract. Please try again.");
+  }
+
 };
 
 // Computed para progress bar
