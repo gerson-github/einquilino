@@ -11,8 +11,11 @@ export function useTemplate() {
     error.value = null;
 
     try {
-      const response = await getTemplate(templateId);
-      template.value = response.data;
+      
+      //const response = await getTemplate(templateId);
+      //template.value = response.data;
+      template.value = await getTemplate(templateId);
+
     } catch (err) {
       error.value = err.message || "Failed to load template";
     } finally {
