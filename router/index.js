@@ -4,7 +4,8 @@ import Dashboard from "@/views/Dashboard.vue";
 import CadastroImoveis from "@/views/CadastroImoveis.vue";
 import Locadores from "@/views/Locadores.vue";
 import Locatarios from "@/views/Locatarios.vue";
-import Contratos from "@/views/Contratos.vue";
+//import Contratos from "@/views/Contratos.vue";
+import ContractDetailsView from "@/views/ContractDetailsView.vue";
 import Pagamentos from "@/views/Pagamentos.vue";
 import Notificacoes from "@/views/Notificacoes.vue";
 import Relatorios from "@/views/Relatorios.vue";
@@ -23,7 +24,8 @@ const routes = [
       },
       { path: "locadores", name: "Locadores", component: Locadores },
       { path: "locatarios", name: "Locatarios", component: Locatarios },
-      { path: "contratos", name: "Contratos", component: Contratos },
+      //{ path: "contratos", name: "Contratos", component: Contratos },
+      { path: "contracts", name: "contracts", component: ContractDetailsView },
       { path: "pagamentos", name: "Pagamentos", component: Pagamentos },
       { path: "notificacoes", name: "Notificacoes", component: Notificacoes },
       { path: "Relatorios", name: "Relatorios", component: Relatorios },

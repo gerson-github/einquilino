@@ -1,11 +1,82 @@
+<script setup>
+import { ref, onMounted, watch, computed } from "vue";
+import FieldRenderer from "@/components/fieldRenderer.vue";
+import { useContract } from "@/composables/useContract";
+import axios from "axios";
+//import { response } from "express";
+
+const API_URL = import.meta.env.VITE_API_URL || "/api";
+
+const formData = ref({});
+const currentStep = ref(0);
+
+const { contract, loading, error, loadContract } = useContract();
+
+const contractId = ref("c1111111-1111-1111-1111-111111111111");
+
+// Carrega contract ao montar
+onMounted(() => {
+  loadContract(contractId.value);
+});
+
+// Inicializa formData quando o contract chega
+watch(contract, (newContract) => {
+  if (!newContract?.groups) return;
+
+  formData.value = {};
+  newContract.groups.forEach((group) => {
+    group.fields.forEach((field) => {
+      formData.value[field.key] = field.value ?? "";
+    });
+  });
+});
+
+// Navegação steps
+const nextStep = () => {
+  if (currentStep.value < contract.value.groups.length - 1) {
+    currentStep.value++;
+  }
+};
+
+const prevStep = () => {
+  if (currentStep.value > 0) {
+    currentStep.value--;
+  }
+};
+
+// Submit
+const submitForm = async () => {
+  try {
+    await axios.put(`${API_URL}/contracts/${contractId.value}`, {
+      version: contract.value.version,
+      submittedAt: new Date().toISOString(),
+      data: formData.value,
+    });
+
+    await loadContract(contractId.value);
+
+    alert("Contract saved successfully!");
+  } catch (error) {
+    console.error("Error saving contract:", error);
+    alert(`Failed to save contract. ${error?.message || ""}`);
+  }
+};
+
+// Progress bar
+const progressWidth = computed(() => {
+  if (!contract.value?.groups?.length) return "0%";
+  return `${((currentStep.value + 1) / contract.value.groups.length) * 100}%`;
+});
+</script>
+
 <template>
-  <!-- Protege todo o conteúdo que depende do template -->
+  <!-- Protege todo o conteúdo que depende do contract -->
   <div
-    v-if="template && template.groups"
+    v-if="contract && contract.groups"
     class="max-w-6xl mx-auto p-6 space-y-8"
   >
     <h1 class="text-2xl font-bold text-gray-800">
-      {{ template.templateName }}
+      {{ contract.templatetName }}
     </h1>
 
     <!-- Progress Bar -->
@@ -22,7 +93,7 @@
         <h2 class="text-lg font-semibold text-gray-700 px-2">Groups</h2>
         <nav class="flex flex-col gap-2">
           <button
-            v-for="(group, index) in template.groups"
+            v-for="(group, index) in contract.groups"
             :key="group.id"
             type="button"
             @click="currentStep = index"
@@ -53,9 +124,9 @@
       <!-- Right Side: Form Content -->
       <div class="md:w-3/4">
         <form @submit.prevent="submitForm" class="space-y-6">
-          <div v-if="template.groups.length > 0">
+          <div v-if="contract.groups.length > 0">
             <section
-              v-for="(group, index) in template.groups"
+              v-for="(group, index) in contract.groups"
               :key="group.id"
               v-show="currentStep === index"
               class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8"
@@ -65,7 +136,7 @@
                   {{ group.name }}
                 </h2>
                 <p class="text-sm text-gray-500 mt-1">
-                  Step {{ index + 1 }} of {{ template.groups.length }}
+                  Step {{ index + 1 }} of {{ contract.groups.length }}
                 </p>
               </div>
 
@@ -92,7 +163,7 @@
 
               <div class="flex gap-4">
                 <button
-                  v-if="currentStep < template.groups.length - 1"
+                  v-if="currentStep < contract.groups.length - 1"
                   type="button"
                   @click="nextStep"
                   class="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
@@ -116,81 +187,8 @@
   </div>
 
   <!-- Loading / Error -->
-  <div v-else-if="loading" class="p-8 text-gray-500">Loading template...</div>
-  <div v-else-if="error" class="p-8 text-red-600">{{ error }}</div>
+  <div v-else-if="loading" class="p-8 text-gray-500">Loading contract...</div>
+  <div v-else-if="error" class="p-8 text-red-600">
+    {{ error }}
+  </div>
 </template>
-
-<script setup>
-import { ref, onMounted, watch, computed, version } from "vue";
-import FieldRenderer from "@/components/fieldRenderer.vue";
-import { useTemplate } from "@/composables/useTemplate";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL || "/api";
-
-const formData = ref({});
-const currentStep = ref(0);
-
-const { template, loading, error, loadTemplate } = useTemplate();
-
-watch(template, (val) => {
-  console.log("TEMPLATE RECEBIDO:", val);
-});
-
-// Carrega template ao montar
-onMounted(() => {
-  //loadTemplate("a1b2c3d4-e5f6-7890-1234-567890abcdef");
-  loadTemplate("c1111111-1111-1111-1111-111111111111");
-});
-
-// Inicializa formData **quando o template chega**
-watch(template, (newTemplate) => {
-  if (!newTemplate?.groups) return;
-  formData.value = {};
-  newTemplate.groups.forEach((group) => {
-    group.fields.forEach((field) => {
-      formData.value[field.key] = field.value ?? "";
-    });
-  });
-});
-
-
-
-
-// Navegação steps
-const nextStep = () => {
-  if (currentStep.value < template.value.groups.length - 1) currentStep.value++;
-};
-const prevStep = () => {
-  if (currentStep.value > 0) currentStep.value--;
-};
-
-// Submit
-const submitForm = () => {
-  //console.log("Payload:", formData.value);
-  //alert("Form submitted successfully!");
-
-  try {
-
-    axios.post(`${API_URL}/contract-data`, {
-      templateId: template.value.id,
-      version: template.value.version,
-      submittedAt: new Date().toISOString(),
-      data: formData.value,
-    });
-
-    alert("Contract saved successfully!");
-
-  } catch (error) {
-    console.error("Error saving contract:", error);
-    alert("Failed to save contract. Please try again.");
-  }
-
-};
-
-// Computed para progress bar
-const progressWidth = computed(() => {
-  if (!template.value?.groups?.length) return "0%";
-  return `${((currentStep.value + 1) / template.value.groups.length) * 100}%`;
-});
-</script>

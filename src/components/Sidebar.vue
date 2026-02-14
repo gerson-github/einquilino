@@ -60,7 +60,7 @@ import {
       </router-link>
 
       <router-link
-        to="/contratos"
+        to="/contracts"
         class="router-link"
         active-class="router-link-active"
       >
